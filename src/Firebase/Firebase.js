@@ -6,8 +6,8 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBkyZdBwpxwjN6YakHnR4exeTZBxtge1xk",
-  authDomain: "se-project-f6890.firebaseapp.com",
+  apiKey: `${process.env.REACT_APP_API_KEY}`,
+  authDomain: `${process.env.REACT_APP_AUTH_DOMAIN}`,
   projectId: "se-project-f6890",
   storageBucket: "se-project-f6890.appspot.com",
   messagingSenderId: "349412233233",
