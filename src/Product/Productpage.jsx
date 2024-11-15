@@ -1,31 +1,72 @@
 import React from 'react'
 import Navbar from '../Navbar'
 import Img1 from '../assets/044a4pYZNk91QwMe8l3DSM1-5.fit_lim.v1708624706.jpg'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useFirebase } from '../Firebase/Firebase'
+import { auth, db } from '../Firebase/Firebase'
+import { doc, getDoc } from "firebase/firestore";
+
 
 function Productpage() {
+    const params = useParams();
+    const firebase = useFirebase();
+    const [data, setData] = useState(null);
+    const [url, setUrl] = useState(null);
+    const [userName, setUsername] = useState('')
+    const [userDetail,setUserDetail]=useState()
+    useEffect(() => {
+        firebase.getProductDetails(params.id).then((value) => setData(value.data()));
+    }, [])
+
+    console.log(params)
+    // console.log(userName)
+    useEffect(() => {
+        if (data) {
+            const imageURL = data.imageURL;
+            firebase.getImageURL(imageURL).then((url) => setUrl(url))
+        }
+    }, [data]);
+    if (data == null) {
+        return (
+            <div class="text-center h-full py-56">
+                <div
+                    class="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
+                ></div>
+                <h2 class="text-zinc-900 dark:text-white mt-4">Loading...</h2>
+                <p class="text-zinc-600 dark:text-zinc-400">
+                    "Campus Deals, Student Steals!"
+                </p>
+            </div>
+        );
+    }
+
+
+
+
+
     return (
         <>
-
             <div className='bg-black'>
                 <Navbar />
                 <div>
-                    <div className="mx-auto flex w-full max-w-7xl items-center justify-center space-y-4 px-2 py-8 md:flex-row md:gap-24 md:space-y-0 lg:grid-cols-4">
-                        <div className='max-w-2xl gap-10'>
-                            <div> 
-                                <img src={Img1} alt='Product-Image' className='h-96 rounded-md' />
+                    <div className="mx-auto flex flex-col w-full max-w-7xl items-center justify-center space-y-4 px-2 py-24 md:flex-row md:gap-32 md:space-y-0 lg:grid-cols-4">
+                        <div className='w-1/2 gap-10 flex-col justify-center items-center'>
+                            <div>
+                                <img src={url} alt='Product-Image' className='h-48 md:h-96 rounded-md' />
                             </div>
-                            <div className='mt-4 grid md:grid-cols-4 gap-7 rounded-md bg-neutral-800 p-3'>
+                            {/* <div className='mt-4 grid md:grid-cols-4 gap-7 w-4/5 md:w-full rounded-md bg-neutral-800 p-3'>
                                 <img src={Img1} alt='Product-Image' />
                                 <img src={Img1} alt='Product-Image' />
                                 <img src={Img1} alt='Product-Image' />
                                 <img src={Img1} alt='Product-Image' />
-                            </div>
+                            </div> */}
                         </div>
                         <div className='max-w-lg'>
-                            <h2 className='text-white text-left font-bold'>Gaming Keyboard</h2>
-                            <h3 className='text-white text-left font-semibold'>₹1500</h3>
-                            <h5 className='text-gray-400 text-left text-base font-normal'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, amet! Temporibus odio nemo cupiditate, nesciunt modi quisquam! Facilis nostrum nobis neque, iusto error possimus quos, quas corporis, architecto sint dolorum culpa aliquam est unde quo beatae! Vitae delectus accusamus dolores.</h5>
-                            <h5 className='text-gray-400 text-left text-sm underline font-normal'>Posted by: DOAA</h5>
+                            <h2 className='text-white text-left font-bold'>{data.title}</h2>
+                            <h3 className='text-white text-left font-semibold'>₹{data.price}</h3>
+                            <h5 className='text-gray-400 text-left text-base font-normal'>{data.description}</h5>
+                            <h5 className='text-gray-400 text-left text-sm underline font-normal'>Posted by: {data.name}</h5>
                             <div className='flex gap-7'>
                                 <button className="mt-4 cursor-pointer flex flex-col items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 hover:scale-105 active:border active:border-violet-400 rounded-md duration-100 p-2">
                                     <span className="text-base text-white font-semibold p-1">Buy Now</span>

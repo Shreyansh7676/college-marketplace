@@ -5,27 +5,66 @@ import Bigbar from './Menu'
 import { ChevronDownIcon } from 'lucide-react'
 import { SearchIcon, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, db } from './Firebase/Firebase'
 
 export function ExampleNavbarFour() {
+    const [userDetail, setUserDetail] = useState(null);
+    const fetchUserData = async () => {
+        auth.onAuthStateChanged(async (user) => {
+            console.log(user);
+
+            const docRef = doc(db, "Users", user.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setUserDetail(docSnap.data());
+                console.log(docSnap.data());
+            } else {
+                console.log("User is not logged in");
+            }
+        });
+    };
+    useEffect(() => {
+        fetchUserData();
+    }, []);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
 
-    const handleLogin=()=>{
-        navigate('login')
+    const handleProfile = () => {
+        navigate('/profile')
     }
 
+    async function handleLogout() {
+        try {
+            await auth.signOut();
+            navigate('/login')
+            console.log("User logged out successfully!");
+        } catch (error) {
+            console.error("Error logging out:", error.message);
+        }
+    }
+
+    const handleLogin = () => {
+        navigate('/login')
+    }
+
+    const handleSell = () => {
+        { userDetail ? navigate('/sell') : alert("You need to login in order to sell your products") }
+
+    }
     return (
         <div className="sticky top-0 w-full bg-black/80 py-4 backdrop-blur-lg z-40 border-b-2 border-gray-400">
             <div className="mx-auto flex max-w-7xl items-center justify-around  px-4 py-2 sm:px-6 lg:px-8">
                 <div className="inline-flex items-center space-x-2">
                     {/* <span className="font-bold text-white text-3xl sm:text-md">College MarketPlace</span> */}
-                    <a className="font-bold text-white text-3xl sm:text-md no-underline" href='/'>College MarketPlace</a>
+                    <a className="font-bold text-white text-3xl sm:text-md no-underline" href='/'>Thapar Mart</a>
                 </div>
-                
+
                 <div className="hidden lg:block">
                     <div className="flex flex-row bg-neutral-800 border-zinc-800 border-4 rounded-md">
 
@@ -52,22 +91,37 @@ export function ExampleNavbarFour() {
                     </div>
                 </div>
                 <div className="hidden lg:block px-8 space-y-4">
-                    <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 hover:scale-105 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                    <button title="Save" onClick={handleSell} className="cursor-pointer flex flex-col items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 hover:scale-105 active:border active:border-violet-400 rounded-md duration-100 p-2">
                         <span className="text-md text-white font-bold p-2">Sell Now</span>
                     </button>
 
 
                 </div>
-                <div>
+                {/* <div>
                     <button>
                         <ShoppingCart onClick={toggleMenu} className="h-6 w-6 text-yellow-50 space-y-4 cursor-pointer hover:text-violet-800 hover:scale-105" />
                     </button>
-                </div>
+                </div> */}
 
-                <div className="ml-2 lg:block">
-                    <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
-                        <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogin}>Login</span>
-                    </button>
+                <div className="ml-2 hidden lg:block">
+
+                    {userDetail ? (
+                        <>
+                            <div className='flex'>
+                                <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                    <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleProfile}>My Profile</span>
+                                </button>
+                                <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                    <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogout}>Logout</span>
+                                </button>
+                            </div>
+                            
+                        </>
+                    ) : (
+                        <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                            <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogin}>Login</span>
+                        </button>
+                    )}
                 </div>
                 <div className="ml-2 lg:hidden">
                     <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer text-white" />

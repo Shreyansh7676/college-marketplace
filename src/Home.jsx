@@ -1,40 +1,49 @@
 import React from 'react'
 import Overlay from './Overlay'
+import Card from './Card'
+import { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import { useNavigate } from 'react-router-dom'
+import { useFirebase } from './Firebase/Firebase'
 
 
 export default function ProductThree() {
+  const firebase = useFirebase();
+  const [products, setProducts] = useState();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    firebase.displayProduct().then((products) => setProducts(products.docs)).catch((error) => {
+      console.error('Error fetching products:', error);
+    }).finally(() => {
+      setLoading(false); // Set loading to false after data fetching is complete
+    });
+  }, [])
+
+
+  if (loading) {
+    return (
+      <div class="text-center h-full py-56">
+        <div
+          class="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
+        ></div>
+        <h2 class="text-zinc-900 dark:text-white mt-4">Loading...</h2>
+        <p class="text-zinc-600 dark:text-zinc-400">
+        "Campus Deals, Student Steals!"
+        </p>
+      </div>
+
+    );
+  }
   return (
     <>
-    <div className="mx-auto grid w-full max-w-7xl items-center space-y-4 px-2 py-10 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
-       
-      {Array.from({ length: 16 }).map((_, i) => (
-        <div key={i} className="rounded-md border hover:scale-105 transition duration-150 ease-in-out hover:bg-neutral-900 hover:shadow-2xl hover:shadow-violet-500 m-3">
-          <img
-            src="https://images.unsplash.com/photo-1588099768523-f4e6a5679d88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwxMTM4MTU1NXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            alt="Laptop"
-            className="aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px] object-cover"
-          />
-          <div className="p-3">
-            <h1 className="inline-flex items-center text-lg font-semibold text-white">₹ 5000</h1>
-            <p className="text-sm text-gray-300">
-              Nike AirMax V2, Used for 1yr
-            </p>
-            <p className="text-sm text-gray-400">
-              Hostel-O
-            </p>
+      <div className="mx-auto grid w-full h-full max-w-7xl items-center space-y-4 px-2 py-24 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
+        {products && products.map(products =>
+          <Card key={products.id} id={products.id} {...products.data()} />
+        )}
 
-            {/* <button title="Save" class="cursor-pointer flex items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 active:border active:border-lime-400 rounded-md duration-100 p-2">
-              
-              <span class="text-sm text-white">Buy Now</span>
-            </button> */}
-            <Overlay />
-      
-        </div>
-        </div>
-  ))
-}
-    </div >
+
+      </div >
     </>
   )
 }

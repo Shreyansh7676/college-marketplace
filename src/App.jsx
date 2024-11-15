@@ -7,7 +7,7 @@ import { ProductProvider } from './Context/ProductContext'
 function App() {
   return (
     <ProductProvider>
-      <main className="bg-black">
+      <main className="bg-black h-full">
         <Navbar />
         <Home />
       </main>
