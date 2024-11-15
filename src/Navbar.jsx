@@ -14,12 +14,11 @@ export function ExampleNavbarFour() {
     const fetchUserData = async () => {
         auth.onAuthStateChanged(async (user) => {
             console.log(user);
-
             const docRef = doc(db, "Users", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setUserDetail(docSnap.data());
-                console.log(docSnap.data());
+                // console.log(docSnap.data());
             } else {
                 console.log("User is not logged in");
             }
@@ -28,7 +27,7 @@ export function ExampleNavbarFour() {
     useEffect(() => {
         fetchUserData();
     }, []);
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const navigate = useNavigate()
 
     const toggleMenu = () => {
@@ -61,7 +60,6 @@ export function ExampleNavbarFour() {
         <div className="sticky top-0 w-full bg-black/80 py-4 backdrop-blur-lg z-40 border-b-2 border-gray-400">
             <div className="mx-auto flex max-w-7xl items-center justify-around  px-4 py-2 sm:px-6 lg:px-8">
                 <div className="inline-flex items-center space-x-2">
-                    {/* <span className="font-bold text-white text-3xl sm:text-md">College MarketPlace</span> */}
                     <a className="font-bold text-white text-3xl sm:text-md no-underline" href='/'>Thapar Mart</a>
                 </div>
 

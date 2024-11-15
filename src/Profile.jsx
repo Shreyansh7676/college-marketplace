@@ -7,15 +7,14 @@ function Profile() {
     const [userDetail, setUserDetail] = useState(null);
     const fetchUserData = async () => {
         auth.onAuthStateChanged(async (user) => {
-            console.log(user);
-
+            // console.log(user);
             const docRef = doc(db, "Users", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setUserDetail(docSnap.data());
                 console.log(docSnap.data());
             } else {
-                console.log("User is not logged in");
+                alert("User is not logged in");
             }
         });
     };
@@ -27,14 +26,11 @@ function Profile() {
         <div className='bg-black'> 
             <Navbar />
             <div className='text-white flex flex-col justify-center items-center h-full mx-auto py-14'>
-
                 {userDetail ? (
                     <>
                         <div className='flex flex-col items-center justify-center py-48'>
                             <h3>Welcome {userDetail.name} 🙏🙏</h3>
-                            <div>
-                                <p>Email: {userDetail.email}</p>
-                            </div>
+                            <p>Email: {userDetail.email}</p>
                         </div>
                     </>
                 ) : (

@@ -1,11 +1,8 @@
 import React from 'react'
 import Navbar from '../Navbar'
-import Img1 from '../assets/044a4pYZNk91QwMe8l3DSM1-5.fit_lim.v1708624706.jpg'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useFirebase } from '../Firebase/Firebase'
-import { auth, db } from '../Firebase/Firebase'
-import { doc, getDoc } from "firebase/firestore";
 
 
 function Productpage() {
@@ -13,13 +10,10 @@ function Productpage() {
     const firebase = useFirebase();
     const [data, setData] = useState(null);
     const [url, setUrl] = useState(null);
-    const [userName, setUsername] = useState('')
-    const [userDetail,setUserDetail]=useState()
     useEffect(() => {
         firebase.getProductDetails(params.id).then((value) => setData(value.data()));
     }, [])
 
-    console.log(params)
     // console.log(userName)
     useEffect(() => {
         if (data) {
@@ -29,21 +23,18 @@ function Productpage() {
     }, [data]);
     if (data == null) {
         return (
-            <div class="text-center h-full py-56">
+            <div className="text-center h-full py-72 bg-black">
+                
                 <div
-                    class="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
+                    className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
                 ></div>
-                <h2 class="text-zinc-900 dark:text-white mt-4">Loading...</h2>
-                <p class="text-zinc-600 dark:text-zinc-400">
+                <h2 className="text-zinc-900 dark:text-white mt-4">Loading...</h2>
+                <p className="text-zinc-600 dark:text-zinc-400">
                     "Campus Deals, Student Steals!"
                 </p>
             </div>
         );
     }
-
-
-
-
 
     return (
         <>

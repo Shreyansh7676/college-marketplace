@@ -26,12 +26,12 @@ const Card=(props)=>{
               {props.title}
             </p>
             <p className="text-sm text-gray-400">
-              Hostel-O
+              Hostel-{props.hostel}
             </p>
 
             <button title="Save" className="cursor-pointer flex items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 active:border active:border-lime-400 rounded-md duration-100 p-2" onClick={handleButton}>
               
-              <span class="text-sm text-white">Buy Now</span>
+              <span className="text-sm text-white">Buy Now</span>
             </button>
             {/* <Overlay /> */}
       

@@ -1,17 +1,16 @@
-// Import the functions you need from the SDKs you need
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore, addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useContext, createContext } from "react";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+
+
+
 const FirebaseContext = createContext(null);
 export const useFirebase = () => useContext(FirebaseContext);
 
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
 
@@ -70,11 +69,6 @@ export const FirebaseProvider = (props) => {
   const displayProduct = async () => {
     return getDocs(collection(db, "products"));
   };
-  const displayUserName = async (id) => {
-    const user = doc(db, 'Users', user.uid);
-    const name = await getDoc(user);
-    return name;
-  };
 
   return (
     <FirebaseContext.Provider
@@ -83,7 +77,6 @@ export const FirebaseProvider = (props) => {
         displayProduct,
         getImageURL,
         getProductDetails,
-        displayUserName,
       }}
     >
       {props.children}
