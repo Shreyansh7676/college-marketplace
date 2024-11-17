@@ -9,12 +9,14 @@ import Register from './Register.jsx'
 import { FirebaseProvider } from './Firebase/Firebase.jsx'
 import Sell from './Sell.jsx'
 import Profile from './Profile.jsx'
+import ProductDetail from './ProductDetail.jsx'
 import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App.jsx'
 const LazyHome = React.lazy(() => import('./App.jsx'))
 
 const router = createBrowserRouter([
@@ -28,13 +30,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <React.Suspense fallback='Loading..'>
-      <LazyHome />
-      </React.Suspense>,
+    element: <App />,
   },
   {
     path: "product/view/:id",
     element: <Product />,
+  },
+  {
+    path: "products/view/:id",
+    element: <ProductDetail />,
   },
   {
     path: "sell",
