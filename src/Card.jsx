@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Card=(props)=>{
   const navigate=useNavigate();
     const handleButton=(e)=>{
-      navigate(`/products/view/${props.id}`)
+      navigate(`/product/view/${props.id}`)
     }
     const firebase=useFirebase();
     const [url, setUrl]=useState(null);

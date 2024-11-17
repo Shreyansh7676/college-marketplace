@@ -10,13 +10,13 @@ import { FirebaseProvider } from './Firebase/Firebase.jsx'
 import Sell from './Sell.jsx'
 import Profile from './Profile.jsx'
 import ProductDetail from './ProductDetail.jsx'
+import App from './App.jsx'
 import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App.jsx'
 const LazyHome = React.lazy(() => import('./App.jsx'))
 
 const router = createBrowserRouter([

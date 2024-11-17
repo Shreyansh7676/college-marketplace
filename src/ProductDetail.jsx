@@ -10,31 +10,30 @@ function Productpage() {
     const firebase = useFirebase();
     const [data, setData] = useState(null);
     const [url, setUrl] = useState(null);
+    console.log(data)
     useEffect(() => {
         firebase.getProductDetails(params.id).then((value) => setData(value.data()));
     }, [])
 
-    // console.log(userName)
     useEffect(() => {
         if (data) {
             const imageURL = data.imageURL;
             firebase.getImageURL(imageURL).then((url) => setUrl(url))
         }
     }, [data]);
-    if (data == null) {
-        return (
-            <div className="text-center h-full py-72 bg-black">
-                
-                <div
-                    className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
-                ></div>
-                <h2 className="text-zinc-900 dark:text-white mt-4">Loading...</h2>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                    "Campus Deals, Student Steals!"
-                </p>
-            </div>
-        );
-    }
+    // if (data == null) {
+    //     return (
+    //         <div className="text-center h-full py-72 bg-black">
+    //             <div
+    //                 className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
+    //             ></div>
+    //             <h2 className="text-zinc-900 dark:text-white mt-4">Loading...</h2>
+    //             <p className="text-zinc-600 dark:text-zinc-400">
+    //                 "Campus Deals, Student Steals!"
+    //             </p>
+    //         </div>
+    //     );
+    // }
 
     return (
         <>

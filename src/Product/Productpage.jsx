@@ -13,7 +13,7 @@ function Productpage() {
     useEffect(() => {
         firebase.getProductDetails(params.id).then((value) => setData(value.data()));
     }, [])
-
+    console.log(data)
     // console.log(userName)
     useEffect(() => {
         if (data) {
