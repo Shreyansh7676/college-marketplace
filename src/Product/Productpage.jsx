@@ -14,6 +14,7 @@ function Productpage() {
         firebase.getProductDetails(params.id).then((value) => setData(value.data()));
     }, [])
     console.log(data)
+    console.log(params)
     // console.log(userName)
     useEffect(() => {
         if (data) {
@@ -24,7 +25,6 @@ function Productpage() {
     if (data == null) {
         return (
             <div className="text-center h-full py-72 bg-black">
-                
                 <div
                     className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-800 mx-auto"
                 ></div>
