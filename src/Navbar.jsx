@@ -11,9 +11,10 @@ import { auth, db } from './Firebase/Firebase'
 
 export function ExampleNavbarFour() {
     const [userDetail, setUserDetail] = useState(null);
+    const [search, setSearch] = useState('');
     const fetchUserData = async () => {
         auth.onAuthStateChanged(async (user) => {
-            console.log(user);
+            // console.log(user);
             const docRef = doc(db, "Users", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
@@ -54,8 +55,9 @@ export function ExampleNavbarFour() {
 
     const handleSell = () => {
         { userDetail ? navigate('/sell') : alert("You need to login in order to sell your products") }
-
     }
+
+
     return (
         <div className="sticky top-0 w-full bg-black/80 py-4 backdrop-blur-lg z-40 border-b-2 border-gray-400">
             <div className="mx-auto flex max-w-7xl items-center justify-around  px-4 py-2 sm:px-6 lg:px-8">
@@ -79,6 +81,8 @@ export function ExampleNavbarFour() {
                             <input
                                 className="flex h-10 sm:w-20 lg:w-80 bg-neutral-800 px-3 py-2 text-sm text-white placeholder:text-white focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                                 type="text"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                                 placeholder="Search"
                             ></input>
 
@@ -113,7 +117,7 @@ export function ExampleNavbarFour() {
                                     <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogout}>Logout</span>
                                 </button>
                             </div>
-                            
+
                         </>
                     ) : (
                         <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
@@ -173,6 +177,8 @@ export function ExampleNavbarFour() {
                                             <input
                                                 className="flex h-10 w-full rounded-md bg-neutral-800 px-3 py-3 text-sm placeholder:text-white focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                                                 type="text"
+                                                value={search}
+                                                onChange={(e) => setSearch(e.target.value)}
                                                 placeholder="Search"
                                             ></input>
                                             <button>
