@@ -134,7 +134,7 @@ export function ExampleNavbarFour() {
                             <div className="px-5 pb-6 pt-5">
                                 <div className="flex items-center justify-between">
                                     <div className="inline-flex items-center space-x-2">
-                                        <span className="font-bold text-white">College Marketplace</span>
+                                        <span className="font-bold text-white">Thapar Mart</span>
                                     </div>
                                     <div className="-mr-2">
                                         <button
@@ -168,11 +168,7 @@ export function ExampleNavbarFour() {
                                     </nav>
 
                                     <div className="flex flex-col py-8 gap-2">
-                                        <select className="flex h-10 w-full bg-transparent text-white px-2 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-900 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900">
-                                            <option className="bg-neutral-800 text-md">TIET</option>
-                                            <option className="bg-neutral-800">IIT Patiala</option>
-
-                                        </select>
+                                            
                                         <div className="flex bg-neutral-800">
                                             <input
                                                 className="flex h-10 w-full rounded-md bg-neutral-800 px-3 py-3 text-sm placeholder:text-white focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -195,13 +191,32 @@ export function ExampleNavbarFour() {
                                             >
                                             </span>
                                             <span
-                                                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-4 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined"
+                                                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-4 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined" onClick={handleSell}
                                             >
                                                 Sell Now
 
                                             </span>
                                         </button>
 
+                                    </div>
+                                    <div>
+                                        {userDetail ? (
+                                            <>
+                                                <div className='flex flex-col'>
+                                                    <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                                        <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleProfile}>My Profile</span>
+                                                    </button>
+                                                    <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                                        <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogout}>Logout</span>
+                                                    </button>
+                                                </div>
+
+                                            </>
+                                        ) : (
+                                            <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                                <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogin}>Login</span>
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
 
