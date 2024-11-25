@@ -69,7 +69,7 @@ function Productpage() {
 
     const handleOrder=async()=>{
         const result=await firebase.placeOrder(params.id);
-        console.log("Order Placedd", result)
+        alert("Order Placed", result)
     }
     return (
         <>
