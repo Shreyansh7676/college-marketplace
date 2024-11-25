@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Bigbar from './Menu'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Eye } from 'lucide-react'
 import { doc, setDoc } from 'firebase/firestore'
 import { storage } from './Firebase/Firebase';
@@ -14,26 +14,62 @@ function Register() {
     const [show, setShow] = useState("password")
     const [password, setPassword] = useState("")
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
+    // const handleRegister = async (e) => {
+    //     e.preventDefault();
+    //     const allowedDomain = '@thapar.edu';
+    //     if (!email.endsWith(allowedDomain)) {
+    //         alert(`Sign-up is only allowed for ${allowedDomain} email addresses.`);
+    //         return;
+    //     }
+    //     try {
+    //         await createUserWithEmailAndPassword(auth, email, password);
+    //         const update = await updateProfile(auth.currentUser, {
+    //             displayName: name,
+    //         });
+    //         const user = auth.currentUser;
+    //         console.log(user);
+    //         if (user) {
+    //             await setDoc(doc(db, "Users", user.uid), {
+    //                 email: user.email,
+    //                 name: name,
+    //                 userId:user.uid,
+    //                 timestamp: new Date(),
+    //             });
+    //         }
+    //         console.log("User Registered Successfully!!");
+    //     } catch (error) {
+    //         console.log(error.message);
+    //     }
+    // };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         const allowedDomain = '@thapar.edu';
         if (!email.endsWith(allowedDomain)) {
             alert(`Sign-up is only allowed for ${allowedDomain} email addresses.`);
             return;
         }
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            const user = auth.currentUser;
-            console.log(user);
-            if (user) {
-                await setDoc(doc(db, "Users", user.uid), {
-                    email: user.email,
-                    name: name
-                });
-            }
-            console.log("User Registered Successfully!!");
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            const update = await updateProfile(auth.currentUser, {
+                displayName: name,
+            });
+
+            const user = userCredential.user;
+
+            setDoc(doc(db, "Users", user.uid), {
+                username: name,
+                email: email,
+                userId: user.uid,
+                timestamp: new Date(),
+            });
+
+            navigate("/login");
         } catch (error) {
-            console.log(error.message);
+            alert(error.message);
         }
     };
     return (
@@ -56,7 +92,7 @@ function Register() {
                             <a className="mt-2 text-center text-sm text-gray-300" href='login'>Sign in to your account</a>
                         </div>
 
-                        <form className="mt-2" method="POST" action="#" onSubmit={handleRegister}>
+                        <form className="mt-2" method="POST" action="#" onSubmit={handleSubmit}>
                             <div className="space-y-5">
                                 <div>
                                     <label className="text-base font-medium text-gray-300">

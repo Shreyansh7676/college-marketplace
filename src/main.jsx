@@ -9,14 +9,17 @@ import Register from './Register.jsx'
 import { FirebaseProvider } from './Firebase/Firebase.jsx'
 import Sell from './Sell.jsx'
 import Profile from './Profile.jsx'
-import ProductDetail from './ProductDetail.jsx'
 import App from './App.jsx'
+import ViewOrders from './ViewOrders.jsx'
 import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthContextProvider } from './Product/AuthContext.jsx'
+import Chat from './chat/Chat.jsx'
+import Chats from './Chats.jsx'
 const LazyHome = React.lazy(() => import('./App.jsx'))
 
 const router = createBrowserRouter([
@@ -37,8 +40,12 @@ const router = createBrowserRouter([
     element: <Product />,
   },
   {
-    path: "products/view/:id",
-    element: <ProductDetail />,
+    path: "chat/:id",
+    element: <Chats />,
+  },
+  {
+    path: "product/orders/:id",
+    element: <ViewOrders />,
   },
   {
     path: "sell",
@@ -52,8 +59,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <AuthContextProvider>
     <FirebaseProvider>
       <RouterProvider router={router} />
     </FirebaseProvider>
+    </AuthContextProvider>
   </StrictMode>,
 )

@@ -57,6 +57,10 @@ export function ExampleNavbarFour() {
         { userDetail ? navigate('/sell') : alert("You need to login in order to sell your products") }
     }
 
+    const handleChats = async () => {
+        navigate(`/chat/${userDetail.userId}`);
+    }
+
 
     return (
         <div className="sticky top-0 w-full bg-black/80 py-4 backdrop-blur-lg z-40 border-b-2 border-gray-400">
@@ -96,8 +100,6 @@ export function ExampleNavbarFour() {
                     <button title="Save" onClick={handleSell} className="cursor-pointer flex flex-col items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 hover:scale-105 active:border active:border-violet-400 rounded-md duration-100 p-2">
                         <span className="text-md text-white font-bold p-2">Sell Now</span>
                     </button>
-
-
                 </div>
                 {/* <div>
                     <button>
@@ -112,6 +114,9 @@ export function ExampleNavbarFour() {
                             <div className='flex'>
                                 <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
                                     <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleProfile}>My Profile</span>
+                                </button>
+                                <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                    <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleChats}>My Chats</span>
                                 </button>
                                 <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
                                     <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogout}>Logout</span>
@@ -205,6 +210,9 @@ export function ExampleNavbarFour() {
                                                 <div className='flex flex-col'>
                                                     <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
                                                         <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleProfile}>My Profile</span>
+                                                    </button>
+                                                    <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
+                                                        <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleChats}>My Chats</span>
                                                     </button>
                                                     <button title="Save" className="cursor-pointer flex flex-col items-center fill-violet-400 bg-transparent hover:bg-violet-900 hover:scale-105 hover:text-violet-600 active:border active:border-violet-400 rounded-md duration-100 p-2">
                                                         <span className="text-md text-white hover:text-violet-600 font-bold p-2" onClick={handleLogout}>Logout</span>
