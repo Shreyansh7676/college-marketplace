@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { db, auth } from "./Firebase/Firebase";
+import { ArrowLeft } from "lucide-react";
 import {
     addDoc,
     collection,
@@ -19,23 +20,16 @@ const UserList = ({ users, setReceiverData, navigate, currentUserId }) => {
     };
 
     return (
-        <ul className="w-full max-w-sm bg-white">
+        <ul className="w-full max-w-sm bg-neutral-900">
             {users?.map((value) => {
                 if (currentUserId !== value.userId)
                     return (
                         <li key={value.userId} className="border-b last:border-b-0">
                             <button
                                 onClick={() => handleToggle(value.username, value.userId)}
-                                className="flex items-center w-full px-4 py-2 hover:bg-gray-50"
+                                className="flex items-center w-full px-4 py-4 hover:bg-neutral-950"
                             >
-                                <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
-                                    {/* <img
-                                        src={`${value.username}.jpg`}
-                                        alt={value.username}
-                                        className="w-full h-full object-cover"
-                                    /> */}
-                                </div>
-                                <span className="ml-3 text-gray-700">{value.username}</span>
+                                <span className="ml-3 text-white">{value.username}</span>
                             </button>
                         </li>
                     );
@@ -93,14 +87,14 @@ export default function Home() {
                     collection(
                         db,
                         "Users",
-                        user.userId,
+                        user.uid,
                         "chatUsers",
                         receiverData.userId,
                         "messages"
                     ),
                     {
                         username: user.displayName,
-                        messageUserId: user.userId,
+                        messageUserId: user.uid,
                         message: chatMessage,
                         timestamp: new Date(),
                     }
@@ -109,7 +103,7 @@ export default function Home() {
                 await addDoc(
                     collection(
                         db,
-                        "users",
+                        "Users",
                         receiverData.userId,
                         "chatUsers",
                         user.uid,
@@ -129,20 +123,19 @@ export default function Home() {
         setChatMessage("");
     };
 
+    const handleHome=(e)=>{
+        e.preventDefault();
+        navigate('/')
+    }
+
     return (
         <div className="flex flex-row flex-1 w-full bg-black py-3">
             <div className="flex flex-col w-1/5 h-[95vh] m-2 bg-neutral-900 rounded-lg shadow">
-                <div className="flex justify-between items-center p-4 border-b">
+                <div className="flex justify-start items-center gap-4 p-4 border-b">
+                    <button>
+                        <ArrowLeft onClick={handleHome} className="h-5 w-5 mx-2 cursor-pointer text-white" />
+                    </button>
                     <h4 className="font-medium text-white">{user?.displayName}</h4>
-                    {/* <button
-                        className="px-4 py-2 text-purple-600 hover:bg-purple-50 rounded"
-                        onClick={() => {
-                            auth.signOut();
-                            navigate("/");
-                        }}
-                    >
-                        Logout
-                    </button> */}
                 </div>
                 <div className="p-4 border-b text-white">All users</div>
                 <div className="overflow-y-auto">
@@ -164,18 +157,16 @@ export default function Home() {
                     {allMessages?.map(({ id, messages }) => (
                         <div
                             key={id}
-                            className={`flex ${
-                                user?.uid === messages.messageUserId
-                                    ? "justify-end"
-                                    : "justify-start"
-                            } mb-4`}
+                            className={`flex ${user?.uid === messages.messageUserId
+                                ? "justify-end"
+                                : "justify-start"
+                                } mb-4`}
                         >
                             <span
-                                className={`bg-purple-300 p-3 rounded-lg max-w-md text-sm
-                                    ${
-                                        user?.uid === messages.messageUserId
-                                            ? "rounded-tr-none text-right"
-                                            : "rounded-tl-none text-left"
+                                className={`bg-purple-800 text-white p-3 rounded-lg max-w-md text-sm
+                                    ${user?.uid === messages.messageUserId
+                                        ? "rounded-tr-none text-right"
+                                        : "rounded-tl-none text-left"
                                     }`}
                             >
                                 {messages.message}
@@ -188,13 +179,13 @@ export default function Home() {
                     <input
                         value={chatMessage}
                         onChange={(e) => setChatMessage(e.target.value)}
-                        className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300"
+                        className="flex-1 p-2 border rounded-lg bg-neutral-900 text-white placeholder:text-white focus:outline-none focus:ring-2 focus:ring-purple-800"
                         type="text"
                         placeholder="Type message..."
                     />
                     <button
                         onClick={sendMessage}
-                        className="ml-2 p-2 text-purple-600 hover:bg-purple-50 rounded-full"
+                        className="ml-2 p-2 text-purple-800 hover:bg-purple-400 rounded-full"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

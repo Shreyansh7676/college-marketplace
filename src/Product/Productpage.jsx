@@ -64,42 +64,12 @@ function Productpage() {
         );
     }
     const handleChat = async () => {
-        navigate(`/chat-home/${data.userId}`);
+        navigate(`/chat/${data.userId}`);
     }
 
     const handleOrder=async()=>{
         const result=await firebase.placeOrder(params.id);
         console.log("Order Placedd", result)
-    }
-
-    const handleSelect = async () => {
-        const combinedId = currentUser.userId > data.userId ? currentUser.uid + data.userId : data.userId + currentUser.uid
-        try {
-            const res = await getDoc(doc,(db, "chats", combinedId))
-            if(!res.exists()){
-                await setDoc(doc,(db,"chats", combinedId),{messages:[]});
-
-                await updateDoc(doc(db,"userChats", currentUser.uid),{
-                    [combinedId+".userInfo"]:{
-                        uid: data.userId,
-                        displayName: data.displayName
-                    },
-                    [combinedId+".date"]:serverTimestamp()
-                })
-
-
-                await updateDoc(doc(db,"userChats", data.userId),{
-                    [combinedId+".userInfo"]:{
-                        uid: currentUser.uid,
-                        displayName: currentUser.displayName
-                    },
-                    [combinedId+".date"]:serverTimestamp()
-                })
-            }
-        } catch (error) {
-
-        }
-
     }
     return (
         <>
@@ -127,7 +97,7 @@ function Productpage() {
                                 <button onClick={handleOrder} className="mt-4 cursor-pointer flex flex-col items-center fill-violet-400 bg-violet-800 hover:bg-violet-900 hover:scale-105 active:border active:border-violet-400 rounded-md duration-100 p-2">
                                     <span className="text-base text-white font-semibold p-1">Buy Now</span>
                                 </button>
-                                <button onClick={handleSelect} className="mt-4 cursor-pointer flex flex-col items-center justify-center fill-violet-400 bg-violet-800 hover:bg-transparent hover:border-2 hover:border-violet-700 rounded-md duration-100 p-1">
+                                <button onClick={handleChat} className="mt-4 cursor-pointer flex flex-col items-center justify-center fill-violet-400 bg-violet-800 hover:bg-transparent hover:border-2 hover:border-violet-700 rounded-md duration-100 p-1">
                                     <span className="text-base text-white font-semibold p-1">Message Seller</span>
                                 </button>
                             </div>

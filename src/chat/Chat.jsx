@@ -1,4 +1,3 @@
-// Chat.jsx
 import React, {
     useState,
     useEffect,
