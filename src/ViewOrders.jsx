@@ -16,11 +16,11 @@ function ViewOrders() {
         <>
             <div className=' bg-black my-auto mx-auto'>
                 <Navbar />
-                <div className='h-full w-full py-12'>
+                <div className='h-full w-full py-36'>
 
                     <div className='flex flex-col items-center justify-center'>
                         <h1 className='text-white'> View Orders Details</h1>
-                        <div className='mt-2 h-full max-w-7xl items-center space-y-4 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4'>
+                        <div className='mt-2 mb-56 h-full max-w-7xl items-center space-y-4 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4'>
                             {
                                 orders.map(order => {
                                     const data = order.data()

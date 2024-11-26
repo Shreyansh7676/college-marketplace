@@ -142,13 +142,13 @@ function Register() {
                                 </div>
                                 <div>
 
-                                    <div className="mt-2 w-full">
+                                    {/* <div className="mt-2 w-full">
                                         <Bigbar />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div>
                                     <button
-                                        className="inline-flex w-full mb-3 items-center justify-center rounded-md bg-violet-800 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-transparent hover:border-2 hover:border-violet-600 duration-100"
+                                        className="inline-flex w-full mb-3 mt-2 items-center justify-center rounded-md bg-violet-800 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-transparent hover:border-2 hover:border-violet-600 duration-100"
                                         type="submit"
                                     >
                                         Get started
