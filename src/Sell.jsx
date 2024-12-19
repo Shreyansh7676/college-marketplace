@@ -27,7 +27,7 @@ function Productpage() {
 
     return (
         <>
-            <div className='bg-black'>
+            <div className='bg-black min-h-screen'>
                 <Navbar />
                 <div>
                     <form action="" onSubmit={handleSubmit}>
