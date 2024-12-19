@@ -73,7 +73,7 @@ function Productpage() {
     }
     return (
         <>
-            <div className='bg-black'>
+            <div className='bg-black min-h-screen'>
                 <Navbar />
                 <div className='py-6'>
                     <div className="mx-auto flex flex-col w-full max-w-7xl items-center justify-center space-y-4 px-2 py-24 md:flex-row md:gap-32 md:space-y-0 lg:grid-cols-4">

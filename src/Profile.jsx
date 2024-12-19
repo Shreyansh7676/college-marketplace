@@ -54,7 +54,7 @@ function Profile() {
     }, []);
 
     return (
-        <div className="bg-black">
+        <div className="bg-black min-h-screen">
             <Navbar />
             <div className="text-white flex flex-col justify-center items-center h-full mx-auto py-20">
                 {loading ? (

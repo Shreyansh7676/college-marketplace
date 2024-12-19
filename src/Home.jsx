@@ -37,7 +37,7 @@ export default function ProductThree() {
   }
   return (
     <>
-      <div className="mx-auto grid w-full h-full max-w-7xl items-center space-y-4 px-2 py-24 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
+      <div className="mx-auto grid w-full min-h-screen max-w-7xl items-center px-2 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
         {products && products.map(products =>
           <Card key={products.id} id={products.id} {...products.data()} />
         )}
