@@ -131,7 +131,7 @@ function Productpage() {
                                 </div>
                             </div>
                             <div className='w-full md:w-1/4'>
-                                <label class="text-base font-medium text-gray-300">
+                                {/* <label class="text-base font-medium text-gray-300">
                                     Add Images
                                 </label>
                                 <div class="mt-1">
@@ -143,6 +143,18 @@ function Productpage() {
                                         class="flex h-12 w-full rounded-md border text-white border-gray-200 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 duration-100"
                                     />
 
+                                </div> */}
+                                <div class="grid w-full max-w-xs items-center gap-1.5">
+                                    <label class="text-base font-medium text-gray-300">
+                                        Add Images*
+                                    </label>
+                                    <input
+                                        id="picture"
+                                        type="file"
+                                        required
+                                        accept="image/png,image/jpeg"
+                                        onChange={(e) => setPicture(e.target.files[0])}
+                                        class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm text-gray-300 file:border-0 file:bg-transparent file:text-gray-100 file:text-sm file:font-medium" />
                                 </div>
                             </div>
                             <div>

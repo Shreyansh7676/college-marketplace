@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { NextUIProvider } from '@nextui-org/react'
 // import App from './App.jsx'
 import Login from './Login.jsx'
 import Home from './Home.jsx'
@@ -59,10 +60,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthContextProvider>
-    <FirebaseProvider>
-      <RouterProvider router={router} />
-    </FirebaseProvider>
-    </AuthContextProvider>
+      <AuthContextProvider>
+        <FirebaseProvider>
+          <RouterProvider router={router} />
+        </FirebaseProvider>
+      </AuthContextProvider>
   </StrictMode>,
 )

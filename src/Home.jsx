@@ -29,7 +29,7 @@ export default function ProductThree() {
         ></div>
         <h2 className="text-zinc-900 dark:text-white mt-4">Loading...</h2>
         <p className="text-zinc-600 dark:text-zinc-400">
-        "Campus Deals, Student Steals!"
+          "Campus Deals, Student Steals!"
         </p>
       </div>
 
@@ -41,8 +41,6 @@ export default function ProductThree() {
         {products && products.map(products =>
           <Card key={products.id} id={products.id} {...products.data()} />
         )}
-
-
       </div >
     </>
   )
