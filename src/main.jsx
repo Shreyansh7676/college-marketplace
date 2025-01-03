@@ -1,9 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { NextUIProvider } from '@nextui-org/react'
 // import App from './App.jsx'
 import Login from './Login.jsx'
-import Home from './Home.jsx'
 import React from 'react'
 import Product from './Product/Productpage.jsx'
 import Register from './Register.jsx'
@@ -19,7 +17,6 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthContextProvider } from './Product/AuthContext.jsx'
-import Chat from './chat/Chat.jsx'
 import Chats from './Chats.jsx'
 const LazyHome = React.lazy(() => import('./App.jsx'))
 

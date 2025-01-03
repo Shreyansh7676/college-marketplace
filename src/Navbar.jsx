@@ -1,8 +1,6 @@
 import React from 'react'
 import { Menu, X } from 'lucide-react'
 import './Navbar.css'
-import Bigbar from './Menu'
-import { ChevronDownIcon } from 'lucide-react'
 import { SearchIcon, ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
