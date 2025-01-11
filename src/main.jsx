@@ -7,6 +7,7 @@ import Product from './Product/Productpage.jsx'
 import Register from './Register.jsx'
 import { FirebaseProvider } from './Firebase/Firebase.jsx'
 import Sell from './Sell.jsx'
+import Admin from './Admin.jsx'
 import Profile from './Profile.jsx'
 import App from './App.jsx'
 import ViewOrders from './ViewOrders.jsx'
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Register />,
+  },
+  {
+    path: "admin",
+    element: <Admin />,
   },
   {
     path: "/",

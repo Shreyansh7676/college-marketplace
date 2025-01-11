@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 
 function App() {
   return (
-      <main className="bg-black h-full">
+      <main className="bg-black min-h-screen">
         <Navbar />
         <Home />
       </main>
