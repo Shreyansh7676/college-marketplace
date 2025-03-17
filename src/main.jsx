@@ -11,6 +11,7 @@ import Admin from './Admin.jsx'
 import Profile from './Profile.jsx'
 import App from './App.jsx'
 import ViewOrders from './ViewOrders.jsx'
+import Landing from './Hero.jsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     element: <Admin />,
   },
   {
-    path: "/",
+    path: "/products",
     element: <App />,
   },
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <Profile />,
+  },
+  {
+    path: "/",
+    element: <Landing />,
   },
 ]);
 
