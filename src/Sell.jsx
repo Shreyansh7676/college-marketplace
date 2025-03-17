@@ -158,11 +158,8 @@ function Productpage() {
                                 </div>
                             </div>
                             <div>
-                                <button
-                                    class="inline-flex w-full mb-3 items-center justify-center rounded-md bg-violet-800 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-transparent hover:border-2 hover:border-violet-600 duration-100"
-                                    type="submit"
-                                >
-                                    Post Now
+                                <button className="bg-black text-violet-800 px-8 py-3 rounded-full font-semibold border-2 border-violet-800 hover:bg-violet-900 hover:text-white transition-colors hover " type='submit'>
+                                    Sell Product
                                 </button>
                             </div>
                         </div >

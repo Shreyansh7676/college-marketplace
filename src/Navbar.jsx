@@ -61,7 +61,7 @@ export function ExampleNavbarFour() {
 
 
     return (
-        <div className="sticky top-0 w-full bg-black/80 py-4 backdrop-blur-lg z-40 border-b-2 border-gray-400">
+        <div className="sticky top-0 w-full bg-black/80 py-4 backdrop-blur-lg z-40 border-b-2 border-violet-800">
             <div className="mx-auto flex max-w-7xl items-center justify-around  px-4 py-2 sm:px-6 lg:px-8">
                 <div className="inline-flex items-center space-x-2">
                     <a className="font-bold text-white text-3xl sm:text-md no-underline" href='/'>Thapar Mart</a>

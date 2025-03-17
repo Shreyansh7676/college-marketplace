@@ -2,6 +2,7 @@ import React from 'react'
 import Card from './Card'
 import { useEffect, useState } from 'react'
 import { useFirebase } from './Firebase/Firebase'
+import Navbar from './Navbar'
 
 
 export default function ProductThree() {
@@ -34,11 +35,15 @@ export default function ProductThree() {
   }
   return (
     <>
-      <div className="mx-auto grid w-full min-h-screen max-w-7xl items-center px-2 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
+    <div className='min-h-screen'>
+        <Navbar />
+    
+      <div className="mx-auto grid w-full max-w-7xl py-12 items-center px-2 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
         {products && products.map(products =>
           <Card key={products.id} id={products.id} {...products.data()} />
         )}
       </div >
+      </div>
     </>
   )
 }
