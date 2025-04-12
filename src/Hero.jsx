@@ -57,7 +57,7 @@ function App() {
 
 
       {/* Features Section */}
-      <div className="py-24 bg-black border-t border-violet-900">
+      <div className="min-h-screen flex items-center bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">Why Choose CampusMarketPlace?</h2>
@@ -95,17 +95,17 @@ function App() {
       </div>
 
       {/* Popular Categories */}
-      <div className="py-24 border-t bg-black border-violet-900">
+      <div className=" bg-black min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-white mb-12 text-center">Popular Categories</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-4">
             {[
               { name: 'Textbooks', icon: <BookOpen size={24} />, count: '2,534' },
               { name: 'Electronics', icon: <Star size={24} />, count: '1,826' },
               { name: 'Furniture', icon: <ShoppingBag size={24} />, count: '943' },
               { name: 'Accessories', icon: <DollarSign size={24} />, count: '1,252' }
             ].map((category) => (
-              <div key={category.name} className="bg-black border border-violet-900 rounded-xl p-6 text-center hover:border-violet-700 transition-transform hover:scale-110 ease-in duration-100">
+              <div key={category.name} className="bg-black border border-violet-900 rounded-xl p-6 px-12 text-center hover:border-violet-700 transition-transform hover:scale-110 ease-in duration-100">
                 <div className="w-12 h-12 bg-violet-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-violet-200">{category.icon}</span>
                 </div>
@@ -118,7 +118,7 @@ function App() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-black border-t border-violet-800 py-16">
+      <div className="bg-black min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Start?</h2>
           <p className="text-violet-100 mb-8 max-w-2xl mx-auto">
@@ -131,7 +131,7 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-black pt-8 pb-2 border-t border-violet-900">
+      <footer className="bg-black pt-8 pb-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-gray-400">
             <p>© 2024 CampusMarketPlace. All rights reserved.</p>
